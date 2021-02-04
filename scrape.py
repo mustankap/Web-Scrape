@@ -12,9 +12,8 @@ for page in range(1,pagesToGet+1):
     url = 'https://www.politifact.com/factchecks/list/?page='+str(page)
     print(url)
     
-    #an exception might be thrown, so the code should be in a try-except block
+    
     try:
-        #use the browser to get the url. This is suspicious command that might blow up.
         page=requests.get(url)                             # this might throw an exception if something goes wrong.
     
     except Exception as e:                                   # this describes what to do if an exception is thrown
