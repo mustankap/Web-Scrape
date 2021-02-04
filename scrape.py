@@ -4,22 +4,25 @@ import urllib.request,sys,time
 import requests
 import pandas as pd
 
+pagesToGet= 1
 
-URL = 'https://www.politifact.com/factchecks/list/'
-
-try:
-     # this might throw an exception if something goes wrong.
-     page=requests.get(URL) 
-     # this describes what to do if an exception is thrown 
-except Exception as e:    
+upperframe=[]  
+for page in range(1,pagesToGet+1):
+    print('processing page :', page)
+    url = 'https://www.politifact.com/factchecks/list/?page='+str(page)
+    print(url)
     
-    error_type, error_obj, error_info = sys.exc_info()      
+    #an exception might be thrown, so the code should be in a try-except block
+    try:
+        #use the browser to get the url. This is suspicious command that might blow up.
+        page=requests.get(url)                             # this might throw an exception if something goes wrong.
     
-    print ('ERROR FOR LINK:',url)
-                            
-    print (error_type, 'Line:', error_info.tb_lineno)
-    
-time.sleep(2)   
+    except Exception as e:                                   # this describes what to do if an exception is thrown
+        error_type, error_obj, error_info = sys.exc_info()      # get the exception information
+        print ('ERROR FOR LINK:',url)                          #print the link that cause the problem
+        print (error_type, 'Line:', error_info.tb_lineno)     #print error info and line that threw the exception
+        continue                                              #ignore this page. Abandon this and go back.
+    time.sleep(2)   
     soup=BeautifulSoup(page.text,'html.parser')
     frame=[]
     links=soup.find_all('li',attrs={'class':'o-listicle__item'})
