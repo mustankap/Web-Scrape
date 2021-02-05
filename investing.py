@@ -32,22 +32,19 @@ for page in range(1,pagesToGet+1):
 
     for j in links:
         Topic = j.find('div',attrs={'class':'content'}).find('h3',attrs={'class':'title'}).text.strip()
-        Statement = j.find('p').text.strip()
-        Source = 
-        Link = 'www.moneycontrol.com'
-        Link += j.find('h2').find('a')['href'].text.strip()
-        Date = j.find('span')
-        frame.append((Topic,Statement,Link,Date))
-        f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+","+Date.replace(",","^")+","+"\n")
+        Statement = j.find('p',attrs={'class':'summery'}).strip()
+        Source = j.find('li',attrs={'class':'details-item is-darker'}).strip()
+        Link = 'www.in.investing.com'
+        Link += j.find('h3',attrs={'class':'title'}).find('a',attrs={'class':'link'})['href'].strip()
+        Date = j.find('li',attrs={'class':'details-item'}).find('time').text.strip()
+        frame.append((Topic,Statement,Source,Link,Date))
+        f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Source+","+Link+","+Date.replace(",","^")+","+"\n")
     upperframe.extend(frame)
 f.close()
-data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
+data=pd.DataFrame(upperframe, columns=['Topic','Statement','Source','Link','Date'])
 data.head()
 
 '''Error stuck in'''
 # processing page : 1
-# https://www.moneycontrol.com/news/business/stocks/?page=1
-# Traceback (most recent call last):
-#   File "moneycontrolscrape.py", line 34, in <module>
-#     Topic = j.find('h2').find('a')['title'].strip()
-# AttributeError: 'NoneType' object has no attribute 'find'
+# https://in.investing.com/equities/india/?page=1
+#  no error but csv page is blank
