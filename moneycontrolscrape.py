@@ -31,13 +31,16 @@ for page in range(1,pagesToGet+1):
     f.write(headers)
 
     for j in links:
-        Topic = j.find('h2').find('a')['title'].strip()
-        Statement = j.find('p').text.strip()
-        Link = 'www.moneycontrol.com'
-        Link += j.find('h2').find('a')['href'].text.strip()
-        Date = j.find('span')
-        frame.append((Topic,Statement,Link,Date))
-        f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+","+Date.replace(",","^")+","+"\n")
+        try:
+            Topic = j.find('h2').find('a')['title'].strip()
+            Statement = j.find('p').text.strip()
+            Link = 'www.moneycontrol.com'
+            Link += j.find('h2').find('a')['href'].text.strip()
+            Date = j.find('span')
+            frame.append((Topic,Statement,Link,Date))
+            f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+","+Date.replace(",","^")+","+"\n")
+        except Exception as e:
+            continue
     upperframe.extend(frame)
 f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
