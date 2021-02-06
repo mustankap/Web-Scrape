@@ -34,7 +34,7 @@ for page in range(1,pagesToGet+1):
     for j in links:
         try:
             Topic = j.find('div',attrs={'class':'content'}).find('h3',attrs={'class':'title'}).text.strip()
-            print(Topic)
+#             print(Topic)
             Statement = j.find('p',attrs={'class':'summery'}).text.strip()
             Source = j.find('li',attrs={'class':'details-item is-darker'}).text.strip()
             Link = 'www.in.investing.com'
@@ -49,7 +49,7 @@ f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Statement','Source','Link','Date'])
 data.head()
 
-'''Error stuck in'''
+
 # processing page : 1
 # https://in.investing.com/equities/india/?page=1
 #  no error but csv page is blank
