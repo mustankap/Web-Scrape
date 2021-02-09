@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 finviz_url = 'https://finviz.com/quote.ashx?t='
 tickers = ['AMZN','AMD','FB']
 
+
 news_tables = {} 
 for ticker in tickers:
     url = finviz_url + ticker
