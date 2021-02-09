@@ -33,15 +33,17 @@ for page in range(1,pagesToGet+1):
     for j in links:
         try:
             Topic = j.find("a").text.strip() 
+            # print(Topic)
+            
             Type = j.find("div",attrs={'class':'Fz(12px) Fw(b) Tt(c) D(ib) Mb(6px) C($c-fuji-blue-1-a) Mend(9px) Mt(-2px)'}).text.strip() 
-            
+           
             Statement = j.find("p").text.strip()
-            
+            #print(Statement)
             Link = 'www.in.finance.yahoo.com'
-            Link += j.find("h3",attrs={'class':'Mb(5px)'}).find('a')['href'].strip()
-            print(Link)
-            # Date = j.find('div').find('span').text.strip()
-            # print(Date)
+            Link += j.find('a')['href'].strip()
+            # print(Link)
+            Date = j.find('div',attrs={'class':'C(#959595) Fz(11px) D(ib) Mb(6px)'}).text.strip()
+            print(Date)
             frame.append((Topic,Type,Statement,Link))
             f.write(Topic.replace(",","^")+","+Type+","+Statement.replace(",","^")+Link+","+"\n")
         except Exception as e:
@@ -51,10 +53,4 @@ f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Type','Statement','Link'])
 data.head()
 
-'''Error stuck in'''
-# processing page : 1
-# https://in.finance.yahoo.com/topic/latestnews?page=1
-# Traceback (most recent call last):
-#   File "yahoofinance.py", line 34, in <module>
-#     Topic = j.find("h3",attrs={'class':'Mb(5px)'}).text.strip()
-# AttributeError: 'NoneType' object has no attribute 'text'
+#only 6 random topics gets stored
