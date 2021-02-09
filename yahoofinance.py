@@ -24,26 +24,29 @@ for page in range(1,pagesToGet+1):
     time.sleep(2)   
     soup = BeautifulSoup(page.text,'html.parser')
     frame = []
-    links = soup.find_all('li',attrs={'class':'js-stream-content Pos(r)'})
+    links = soup.find(id='Fin-Stream')
+    listy = links.find_all('li')
+    
+    
     filename = "YAHOOFINANCE.csv"
     f = open(filename,"w", encoding = 'utf-8')
     headers="Topic,Type,Statement,Link\n"
     f.write(headers)
 
-    for j in links:
+    for j in listy:
         try:
-            Topic = j.find("a").text.strip() 
-            # print(Topic)
+            Topic = j.find("a").text.strip()
+            print(Topic)
             
             Type = j.find("div",attrs={'class':'Fz(12px) Fw(b) Tt(c) D(ib) Mb(6px) C($c-fuji-blue-1-a) Mend(9px) Mt(-2px)'}).text.strip() 
            
             Statement = j.find("p").text.strip()
-            #print(Statement)
+            print(Statement)
             Link = 'www.in.finance.yahoo.com'
             Link += j.find('a')['href'].strip()
-            # print(Link)
+            print(Link)
             Date = j.find('div',attrs={'class':'C(#959595) Fz(11px) D(ib) Mb(6px)'}).text.strip()
-            print(Date)
+            # print(Date)
             frame.append((Topic,Type,Statement,Link))
             f.write(Topic.replace(",","^")+","+Type+","+Statement.replace(",","^")+Link+","+"\n")
         except Exception as e:
@@ -53,4 +56,4 @@ f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Type','Statement','Link'])
 data.head()
 
-#only 6 random topics gets stored
+# only 6 random topics gets stored

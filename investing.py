@@ -58,8 +58,5 @@ import pandas as pd
 
 
 
-data=pd.DataFrame()
-df.to_csv('INVESTING.csv') 
-
 
 
