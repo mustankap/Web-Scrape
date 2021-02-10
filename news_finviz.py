@@ -20,7 +20,8 @@ f.write(headers)
 for row in rows:
     try:
         statement = row.find('a').text.strip()
-        timestamp = row.find('td').text.strip()
+        timestamp = row.find('td',attrs = {'class':'nn-date'}).text.strip()
+        # print(timestamp)
         link = row.find('a')['href'].strip()
         # print(link)
         frame.append((timestamp,statement,link))
