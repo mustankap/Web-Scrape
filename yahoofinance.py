@@ -12,7 +12,6 @@ for page in range(1,pagesToGet+1):
     url = 'https://in.finance.yahoo.com/topic/latestnews?page='+str(page)
     print(url)
     
-    
     try:
         page=requests.get(url)                             
     
