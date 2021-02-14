@@ -1,7 +1,8 @@
-'''import urllib
+import urllib
 from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
+import investpy
 import pandas as pd
 
 pagesToGet= 1
@@ -51,9 +52,7 @@ data.head()
 
 # https://in.investing.com/equities/india/?page=1
 #  no error but csv page is blank
-'''
-import investpy
-import pandas as pd
+
 
 
 
