@@ -14,26 +14,28 @@ for ticker in tickers:
     news_tables[ticker]=news
     
 
-# amzn_data = news_tables['AMZN']
-# amzn_rows = amzn_data.find_all('tr')
+amzn_data = news_tables['AMZN']
+amzn_rows = amzn_data.find_all('tr')
 
 
-# for index,row in enumerate(amzn_rows):
-#     title = row.a.text
-#     timestamp= row.td.text
-#     print(timestamp + "  " +title)
+for index,row in enumerate(amzn_rows):
+    title = row.a.text
+    timestamp= row.td.text
+    print(timestamp + "  " +title)
 
-parsed_data = []
-for ticker,news_table in news_tables.items():
-    for row in news_table.find_all('tr'):
-        title = row.a.text
-        date_data = row.td.text.split(' ')
+# parsed_data = []
+# for ticker,news_table in news_tables.items():
+#     for row in news_table.find_all('tr'):
+#         title = row.a.text
+#         date_data = row.td.text.split(' ')
 
-        if len(date_data) == 1:
-            time = date_data[0]
-        else:
-            date = date_data[0]
-            time = date_data[1]
-    parsed_data.append([ticker,date,time,title])
+#         if len(date_data) == 1:
+#             time = date_data[0]
+#         else:
+#             date = date_data[0]
+#             time = date_data[1]
+#     parsed_data.append([ticker,date,time,title])
 
-print(parsed_data)
+# print(parsed_data)
+
+	

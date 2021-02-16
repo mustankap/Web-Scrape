@@ -10,7 +10,7 @@ pagesToGet= 1
 upperframe=[]  
 for page in range(1,pagesToGet+1):
     print('processing page :', page)
-    url = 'https://in.investing.com/equities/india/?page='+str(page)
+    url = 'https://www.investing.com/news/stock-market-news'
     print(url)
     
     
