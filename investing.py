@@ -1,61 +1,52 @@
+import requests
 import urllib
 from bs4 import BeautifulSoup
 import urllib.request,sys,time
-import requests
-import investpy
-import pandas as pd
 
-pagesToGet= 1
 
-upperframe=[]  
-for page in range(1,pagesToGet+1):
-    print('processing page :', page)
-    url = 'https://www.investing.com/news/stock-market-news'
-    print(url)
+url = f'https://in.investing.com/news/markets/stock-market'
+print(url) 
+for _ in range() 
+try:
+    page=requests.get(url)  
+                                
+except Exception as e:                                   
+    error_type, error_obj, error_info = sys.exc_info()      
+    print ('ERROR FOR LINK:',url)                          
+    print (error_type, 'Line:', error_info.tb_lineno)     
+                                                
+time.sleep(1)   
+soup = BeautifulSoup(page.text,'html.parser')
+
+links = soup.find('ul',attrs={'class':'common-articles-list'})
+print(links)
+
+
+
+
+# if len(links) == 0:
+#     continue
+# else:
+#     f.write(f'company :{tickers[i]}'+'\n')
+# for j in links:
+#     try:
+#         Topic = j.find('a').text.strip()
+#         #print(Topic)
+#         Statement = j.find('p').text.strip()
+#         #print(Statement)
+#         Link = 'www.in.finance.yahoo.com/news/'
+#         Link += j.find('h3').find('a')['href'].strip()
+#         #print(Link)
+#         # Date = j.find('div').find('span')
+#         # print(Date.text)
+#         frame.append((Topic,Statement,Link))
+#         f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+"\n")
+#     except Exception as e:
+#         continue
+# upperframe.extend(frame)
+# f.write('\n')
+# f.close()
+# data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link'])
+# data.head()
+            
     
-    
-    try:
-        page=requests.get(url)                             
-    
-    except Exception as e:                                   
-        error_type, error_obj, error_info = sys.exc_info()      
-        print ('ERROR FOR LINK:',url)                          
-        print (error_type, 'Line:', error_info.tb_lineno)     
-        continue                                              
-    time.sleep(2)   
-    soup = BeautifulSoup(page.text,'html.parser')
-    frame = [] 
-    links = soup.find_all('li',attrs={'class':"common-articles-item  js-external-content-link"})
-    print(len(links))
-    filename = "INVESTING.csv"
-    f = open(filename,"w", encoding = 'utf-8')
-    headers="Topic,Statement,Source,Link,Date\n"
-    f.write(headers)
-
-    for j in links:
-        try:
-            Topic = j.find('div',attrs={'class':'content'}).find('h3',attrs={'class':'title'}).text.strip()
-            Statement = j.find('p',attrs={'class':'summery'}).text.strip()
-            Source = j.find('li',attrs={'class':'details-item is-darker'}).text.strip()
-            Link = 'www.in.investing.com'
-            Link += j.find('h3',attrs={'class':'title'}).find('a',attrs={'class':'link'})['href'].strip()
-            Date = j.find('li',attrs={'class':'details-item'}).find('time').text.strip()
-            frame.append((Topic,Statement,Source,Link,Date))
-            f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Source+","+Link+","+Date.replace(",","^")+","+"\n")
-        except Exception as e:
-            continue
-    upperframe.extend(frame)
-f.close()
-data=pd.DataFrame(upperframe, columns=['Topic','Statement','Source','Link','Date'])
-data.head()
-
-
-# https://in.investing.com/equities/india/?page=1
-#  no error but csv page is blank
-
-
-
-
-
-
-

@@ -15,7 +15,7 @@ f.write(headers)
 
 for i in range(len(tickers)):
     url = f'https://in.finance.yahoo.com/quote/{tickers[i]}/news?p={tickers[i]}'
-    #print(url)
+    print("Scraped :" + url)
     try:
         page=requests.get(url)  
         # print(page)                           

@@ -26,10 +26,12 @@ for row in rows:
         # print(link)
         frame.append((timestamp,statement,link))
         f.write(statement.replace(",","^")+","+timestamp.replace(",","^")+","+link+"\n")
+        
     except Exception as e:
         continue
     # timestamp= row.td.text
     # print(timestamp+"  "+title)
+print("Scraped : "+url )
 upperframe.extend(frame)
 f.close()
 # data=pd.DataFrame(upperframe, columns=['timestamp','statement','link'])
