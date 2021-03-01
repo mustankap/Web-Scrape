@@ -1,22 +1,22 @@
-from urllib.request import urlopen as uReq
-from bs4 import BeautifulSoup as soup
-from datetime import datetime, timedelta
-from dateutil import parser
-import pytz
+# from urllib.request import urlopen as uReq
+# from bs4 import BeautifulSoup as soup
+# from datetime import datetime, timedelta
+# from dateutil import parser
+# import pytz
 
-my_url = "https://www.coindesk.com/category/business-news/legal"
+# my_url = "https://www.coindesk.com/category/business-news/legal"
 
-# Opening up the website, grabbing the page
-uFeedOne = uReq(my_url, timeout=5)
-page_one = uFeedOne.read()
-uFeedOne.close()
+# # Opening up the website, grabbing the page
+# uFeedOne = uReq(my_url, timeout=5)
+# page_one = uFeedOne.read()
+# uFeedOne.close()
 
-# html parser
-page_soup1 = soup(page_one, "html.parser")
+# # html parser
+# page_soup1 = soup(page_one, "html.parser")
 
-# grabs each publication block
-containers = page_soup1.findAll("a", {"class": "stream-article"} )
-print(len(containers))
+# # grabs each publication block
+# containers = page_soup1.findAll("a", {"class": "stream-article"} )
+# print(len(containers))
 
 # for container in containers:
 #   ## get todays date.
@@ -48,3 +48,31 @@ print(len(containers))
   #     print("publication_date: " + publication_date)
   #     print("title: ", title)
   #     print("description: " + description)
+
+  from datetime import datetime 
+import pytz 
+  
+# get the standard UTC time  
+UTC = pytz.utc 
+  
+# it will get the time zone  
+# of the specified location 
+IST = pytz.timezone('Asia/Kolkata') 
+  
+# print the date and time in 
+# standard format 
+print("UTC in Default Format : ",  
+      datetime.now(UTC)) 
+  
+print("IST in Default Format : ",  
+      datetime.now(IST)) 
+  
+# print the date and time in  
+# specified format 
+datetime_utc = datetime.now(UTC) 
+print("Date & Time in UTC : ", 
+      datetime_utc.strftime('%Y:%m:%d %H:%M:%S %Z %z')) 
+  
+datetime_ist = datetime.now(IST) 
+print("Date & Time in IST : ",  
+      datetime_ist.strftime('%Y:%m:%d %H:%M:%S %Z %z')) 

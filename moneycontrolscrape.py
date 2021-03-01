@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
 import pandas as pd
-
+import datetime
 pagesToGet= 1
 
 upperframe=[]  

@@ -3,23 +3,75 @@ import urllib
 from bs4 import BeautifulSoup
 import urllib.request,sys,time
 
+pages_to_get = 5
 
-url = f'https://in.investing.com/news/markets/stock-market'
-print(url) 
-for _ in range() 
-try:
-    page=requests.get(url)  
-                                
-except Exception as e:                                   
-    error_type, error_obj, error_info = sys.exc_info()      
-    print ('ERROR FOR LINK:',url)                          
-    print (error_type, 'Line:', error_info.tb_lineno)     
-                                                
-time.sleep(1)   
-soup = BeautifulSoup(page.text,'html.parser')
+nifty50=['axis-bank',
+'mundra-port-special-eco.-zone',
+'asian-paints',
+'bajaj-auto',
+'bajaj-finance',
+'bajaj-finserv-limited',
+'bharat-petroleum',
+'bharti-airtel',
+'britannia-industries',
+'cipla',
+'coal-india',
+'divis-laboratories',	
+'dr-reddys-laboratories',	
+'eicher-motors',	
+'gail-(india)',
+'grasim-industries',
+'hcl-technologies',
+'hdfc-bank-ltd',
+'hdfc-standard-life',
+'hero-motocorp',
+'hindalco-industries',
+'hindustan-unilever',
+'housing-development-finance',	
+'icici-bank-ltd',
+'itc',	
+'indian-oil-corporation',	
+'indusind-bank',	
+'infosys',	
+'jsw-steel',	
+'kotak-mahindra-bank',	
+'larsen---toubro',
+'mahindra---mahindra',
+'maruti-suzuki-india',	
+'ntpc',
+'nestle',	
+'oil---natural-gas-corporation',
+'power-grid-corp.-of-india',	
+'reliance-industries',
+'state-bank-of-india',	
+'sbi-life-insurance',	
+'shree-cements',	
+'sun-pharma-advanced-research',	
+'tata-consultancy-services',
+'tata-motors-ltd',	
+'tata-steel',
+'tech-mahindra',
+'titan-industries',
+'united-phosphorus',
+'ultratech-cement',	
+'wipro-ltd']
 
-links = soup.find('ul',attrs={'class':'common-articles-list'})
-print(links)
+for i in nifty50:
+    url = f'https://in.investing.com/equities/{i}-news'
+    print(url) 
+    for _ in range(pages_to_get+1): 
+        try:
+            page=requests.get(url)  
+                                        
+        except Exception as e:                                   
+            error_type, error_obj, error_info = sys.exc_info()      
+            print ('ERROR FOR LINK:',url)                          
+            print (error_type, 'Line:', error_info.tb_lineno)     
+        time.sleep(1)   
+        soup = BeautifulSoup(page.text,'html.parser')
+        links = soup.find('li',attrs={'class':'common-articles-item'})
+        print(len(links))
+     
 
 
 

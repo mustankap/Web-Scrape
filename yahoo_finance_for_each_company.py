@@ -8,6 +8,7 @@ import pandas as pd
 
 tickers = companies
 upperframe=[]
+
 filename = "YAHOONEWS.csv"
 f = open(filename,"w", encoding = 'utf-8')
 headers="Topic,Statement,Link\n"
