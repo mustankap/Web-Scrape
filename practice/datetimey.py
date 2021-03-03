@@ -75,13 +75,13 @@ IST = pytz.timezone('Asia/Kolkata')
   
 datetime_ist = datetime.now(IST) 
 m=datetime_ist.strftime('%H:%M')
-print(typeOf(m))
+
 # print(m) 
-# import datetime as dt 
+import datetime as dt 
 # import json
 
-# today = dt.date.today()
-
+today = dt.date.today()
+print(today)
 # with open("datetrack.json",'r') as file:
 #   temp=json.load(file)
 

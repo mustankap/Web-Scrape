@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
 import pandas as pd
-from todays_date import Ddate,Dtime
+
 pagesToGet= 1
 
 upperframe=[]  
@@ -37,7 +37,7 @@ for page in range(1,pagesToGet+1):
             f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+","+Date.replace(",","^")+"\n")
         except Exception as e:
             continue
-#     upperframe.extend(frame)
+    upperframe.extend(frame)
 
-# data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
-# data.head()
+data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
+data.head()
