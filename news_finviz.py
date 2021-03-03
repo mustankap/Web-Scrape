@@ -12,10 +12,6 @@ rows = news.find_all('tr')
 
 frame = []
 upperframe = []
-filename = "FINVIZ.csv"
-f = open(filename,"w", encoding = 'utf-8')
-headers="statement,timestamp,link\n"
-f.write(headers)
 
 for row in rows:
     try:

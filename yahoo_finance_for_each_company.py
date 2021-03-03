@@ -9,10 +9,7 @@ import pandas as pd
 tickers = companies
 upperframe=[]
 
-filename = "YAHOONEWS.csv"
-f = open(filename,"w", encoding = 'utf-8')
-headers="Topic,Statement,Link\n"
-f.write(headers)
+
 
 for i in range(len(tickers)):
     url = f'https://in.finance.yahoo.com/quote/{tickers[i]}/news?p={tickers[i]}'

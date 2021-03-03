@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
 import pandas as pd
-import datetime
+from todays_date import Ddate,Dtime
 pagesToGet= 1
 
 upperframe=[]  
@@ -11,7 +11,6 @@ for page in range(1,pagesToGet+1):
     print('processing page :', page)
     url = 'https://www.moneycontrol.com/news/business/stocks/?page='+str(page)
     print(url)
-    
     
     try:
         page=requests.get(url)                             
@@ -25,10 +24,7 @@ for page in range(1,pagesToGet+1):
     soup = BeautifulSoup(page.text,'html.parser')
     frame = []
     links = soup.find_all('li',attrs={'class':'clearfix'})
-    filename = "MONEYCONTROLNEWS.csv"
-    f = open(filename,"w", encoding = 'utf-8')
-    headers="Topic,Statement,Link,Date\n"
-    f.write(headers)
+    
 
     for j in links:
         try:
@@ -37,11 +33,11 @@ for page in range(1,pagesToGet+1):
             Link = 'www.moneycontrol.com'
             Link += j.find('h2').find('a')['href'].strip()
             Date = j.find('span').text.strip()
-            frame.append((Topic,Statement,Link,Date))
+            #frame.append((Topic,Statement,Link,Date))
             f.write(Topic.replace(",","^")+","+Statement.replace(",","^")+","+Link+","+Date.replace(",","^")+"\n")
         except Exception as e:
             continue
-    upperframe.extend(frame)
-f.close()
-data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
-data.head()
+#     upperframe.extend(frame)
+
+# data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
+# data.head()
