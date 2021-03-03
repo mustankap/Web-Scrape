@@ -49,15 +49,15 @@
 #   #     print("title: ", title)
 #   #     print("description: " + description)
 
-# from datetime import datetime 
-# import pytz 
+from datetime import datetime 
+import pytz 
   
 # # get the standard UTC time  
 # # UTC = pytz.utc 
   
 # # it will get the time zone  
 # # of the specified location 
-# IST = pytz.timezone('Asia/Kolkata') 
+IST = pytz.timezone('Asia/Kolkata') 
   
 # # print the date and time in 
 # # standard format 
@@ -73,8 +73,9 @@
 # # print("Date & Time in UTC : ", 
 # #       datetime_utc.strftime('%Y:%m:%d %H:%M:%S %Z %z')) 
   
-# datetime_ist = datetime.now(IST) 
-# m=datetime_ist.strftime('%Y/%m/%d %H:%M:%S')
+datetime_ist = datetime.now(IST) 
+m=datetime_ist.strftime('%H:%M')
+print(typeOf(m))
 # print(m) 
 # import datetime as dt 
 # import json
