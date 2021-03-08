@@ -1,7 +1,9 @@
 from urllib.request import urlopen,Request
 from bs4 import BeautifulSoup
 import pandas as pd
-
+import pytz
+from datetime import datetime
+from main_process import f
 url = 'https://finviz.com/news.ashx'
 
 req = Request(url = url, headers={'user-agent':'my-app'})
@@ -10,6 +12,10 @@ html = BeautifulSoup(response,'html')
 news = html.find(id='news')
 rows = news.find_all('tr')
 
+filename = "FINVIZ.csv"
+f = open(filename,"w", encoding = 'utf-8')
+headers="statement,timestamp,link\n"
+f.write(headers)
 frame = []
 upperframe = []
 
@@ -17,18 +23,19 @@ for row in rows:
     try:
         statement = row.find('a').text.strip()
         timestamp = row.find('td',attrs = {'class':'nn-date'}).text.strip()
-        # print(timestamp)
         link = row.find('a')['href'].strip()
-        # print(link)
         frame.append((timestamp,statement,link))
         f.write(statement.replace(",","^")+","+timestamp.replace(",","^")+","+link+"\n")
         
     except Exception as e:
         continue
-    # timestamp= row.td.text
-    # print(timestamp+"  "+title)
+   
 print("Scraped : "+url )
 upperframe.extend(frame)
-f.close()
-# data=pd.DataFrame(upperframe, columns=['timestamp','statement','link'])
-# data.head()
+IST = pytz.timezone('Asia/Kolkata') 
+datetime_ist = datetime.now(IST) 
+timern=datetime_ist.strftime('%H:%M')
+if(timern=="16:00"):
+    f.close()
+data=pd.DataFrame(upperframe, columns=['timestamp','statement','link'])
+data.head()

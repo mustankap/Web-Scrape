@@ -2,15 +2,19 @@ from datetime import datetime
 import json
 import subprocess
 import pytz
-import datetime as dt 
+import os.path
+import datetime as dt
+
 
 IST = pytz.timezone('Asia/Kolkata') 
 datetime_ist = datetime.now(IST) 
 timern=datetime_ist.strftime('%H:%M')
 today = dt.date.today()
+f = None
 
 def moneycsvmake():
-    filename = f"MONEYCONTROLNEWS_{today}.csv"
+    save_path = '/home/mustansir/Web-Scrape/MoneyControlCSVs'       
+    filename = os.path.join(save_path,f"MONEYCONTROLNEWS_{today}.csv")
     f = open(filename,"w", encoding = 'utf-8')
     headers="Topic,Statement,Link,Date\n"
     f.write(headers)
@@ -19,7 +23,8 @@ def moneycsvmake():
         f.close()
 
 def yahoocsvmake():
-    filename = f"YAHOONEWS_{today}.csv"
+    save_path = '/home/mustansir/Web-Scrape/YahooNewsCSVs'
+    filename = os.path.join(save_path,f"YAHOONEWS_{today}.csv")
     f = open(filename,"w", encoding = 'utf-8')
     headers="Topic,Statement,Link\n"
     f.write(headers)
@@ -28,17 +33,14 @@ def yahoocsvmake():
         f.close()
 
 def finvizcsvmake():
-    filename = f"FINVIZ_{today}.csv"
+    save_path = '/home/mustansir/Web-Scrape/FinvizCSVs'
+    filename = os.path.join(save_path,f"FINVIZ_{today}.csv")
     f = open(filename,"w", encoding = 'utf-8')
     headers="statement,timestamp,link\n"
     f.write(headers)
     subprocess.call(['python3', 'news_finviz.py'])
     if(timern=="16:00"):
         f.close()
-
-
-
-
 with open("datetrack.json",'r') as file:
     temp=json.load(file)
 if(str(today)==temp['date']):

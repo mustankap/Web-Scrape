@@ -5,7 +5,9 @@ from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
 import pandas as pd
-
+import pytz
+from datetime import datetime
+from main_process import f
 tickers = companies
 upperframe=[]
 
@@ -47,7 +49,11 @@ for i in range(len(tickers)):
             continue
     upperframe.extend(frame)
     f.write('\n')
-f.close()
+IST = pytz.timezone('Asia/Kolkata') 
+datetime_ist = datetime.now(IST) 
+timern=datetime_ist.strftime('%H:%M')
+if(timern=="16:00"):
+    f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link'])
 data.head()
             

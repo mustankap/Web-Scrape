@@ -3,7 +3,9 @@ from bs4 import BeautifulSoup
 import urllib.request,sys,time
 import requests
 import pandas as pd
-
+import pytz
+from datetime import datetime 
+from main_process import f
 pagesToGet= 1
 
 upperframe=[]  
@@ -38,6 +40,10 @@ for page in range(1,pagesToGet+1):
         except Exception as e:
             continue
     upperframe.extend(frame)
-
+IST = pytz.timezone('Asia/Kolkata') 
+datetime_ist = datetime.now(IST) 
+timern=datetime_ist.strftime('%H:%M')
+if(timern=="16:00"):
+    f.close()
 data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
 data.head()
