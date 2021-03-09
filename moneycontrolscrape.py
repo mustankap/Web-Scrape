@@ -32,7 +32,7 @@ for page in range(1,pagesToGet+1):
         try:
             Topic = j.find('h2').find('a')['title'].strip()
             Statement = j.find('p').text.strip()
-            Link = 'www.moneycontrol.com'
+            iLnk = 'www.moneycontrol.com'
             Link += j.find('h2').find('a')['href'].strip()
             Date = j.find('span').text.strip()
             #frame.append((Topic,Statement,Link,Date))

@@ -10,11 +10,12 @@ IST = pytz.timezone('Asia/Kolkata')
 datetime_ist = datetime.now(IST) 
 timern=datetime_ist.strftime('%H:%M')
 today = dt.date.today()
-f = None
+f = None 
 
 def moneycsvmake():
     save_path = '/home/mustansir/Web-Scrape/MoneyControlCSVs'       
     filename = os.path.join(save_path,f"MONEYCONTROLNEWS_{today}.csv")
+    global f
     f = open(filename,"w", encoding = 'utf-8')
     headers="Topic,Statement,Link,Date\n"
     f.write(headers)
@@ -25,6 +26,7 @@ def moneycsvmake():
 def yahoocsvmake():
     save_path = '/home/mustansir/Web-Scrape/YahooNewsCSVs'
     filename = os.path.join(save_path,f"YAHOONEWS_{today}.csv")
+    global f
     f = open(filename,"w", encoding = 'utf-8')
     headers="Topic,Statement,Link\n"
     f.write(headers)
@@ -35,6 +37,7 @@ def yahoocsvmake():
 def finvizcsvmake():
     save_path = '/home/mustansir/Web-Scrape/FinvizCSVs'
     filename = os.path.join(save_path,f"FINVIZ_{today}.csv")
+    global f
     f = open(filename,"w", encoding = 'utf-8')
     headers="statement,timestamp,link\n"
     f.write(headers)
