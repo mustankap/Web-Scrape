@@ -5,6 +5,8 @@ import requests
 import pandas as pd
 import pytz
 from datetime import datetime 
+import os.path
+
 
 def moneycontrolscrap(f):
     pagesToGet= 1
@@ -47,4 +49,5 @@ def moneycontrolscrap(f):
         f.close()
     data=pd.DataFrame(upperframe, columns=['Topic','Statement','Link','Date'])
     data.head()
-    return 
+    
+moneycontrolscrap(f)
